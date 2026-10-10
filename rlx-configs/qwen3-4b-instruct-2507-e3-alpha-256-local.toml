@@ -1,0 +1,45 @@
+max_steps = 300
+seq_len = 8192
+
+[deployment]
+num_train_gpus = 1
+num_infer_gpus = 1
+gpus_per_node = 2
+
+[ckpt]
+
+[model]
+name = "Qwen/Qwen3-4B-Instruct-2507"
+
+[wandb]
+project = "ascii-align"
+name = "ascii-layout-alpha-256-qwen3-4b-instruct-2507"
+
+[trainer.optim]
+lr = 1e-6
+
+[trainer.model.lora]
+rank = 16
+alpha = 256
+
+[orchestrator]
+batch_size = 512
+rollouts_per_example = 16
+
+[orchestrator.sampling]
+max_tokens = 5000
+
+[[orchestrator.env]]
+id = "ascii-align"
+name = "ascii-align"
+
+[orchestrator.val]
+interval = 10
+num_examples = 32
+rollouts_per_example = 3
+
+[inference]
+gpu_memory_utilization = 0.7
+
+[inference.model]
+max_model_len = 8192
