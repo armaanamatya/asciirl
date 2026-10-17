@@ -1,0 +1,21 @@
+[project]
+name = "ascii-align"
+description = "Environment for checking ASCII diagram alignment"
+tags = ["single-turn", "diagramming", "eval"]
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "openai>=2.16.0",
+    "verifiers>=0.1.9.post3",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+include = ["ascii_align.py", "alignment_check.py", "dataset.py", "pyproject.toml"]
+
+[tool.verifiers.eval]
+num_examples = 5
+rollouts_per_example = 3
